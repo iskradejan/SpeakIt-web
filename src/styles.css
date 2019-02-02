@@ -1,0 +1,15 @@
+body, html {
+  height: 100%;
+  background-color: white;
+}
+
+.btn-red {
+  background-color: #F78733;
+  color: white;
+}
+
+.card {
+  background-color: #efefef;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiCaller } from '../services/ApiCaller';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +14,8 @@ import { AccountCreateComponent } from './account-create/account-create.componen
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -20,6 +23,7 @@ import { AccountCreateComponent } from './account-create/account-create.componen
     AccountCreateComponent
   ],
   providers: [
+    ApiCaller,
     {
       provide: APP_BASE_HREF,
       useValue: ''

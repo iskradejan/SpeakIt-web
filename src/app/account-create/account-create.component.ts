@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Account } from '../../dataobjects/account';
+import { Account } from '../../dataobjects/Account';
 
 @Component({
   selector: 'app-account-create',

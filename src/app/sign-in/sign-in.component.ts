@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from '../../dataobjects/Account';
 import { ApiCaller } from '../../services/ApiCaller';
-import { ApiVersion } from '../../dataobjects/ApiVersion';
-
-// import { Router } from '@angular/router';
+import { Session } from '../../dataobjects/Session';
+import { ApiException } from '../../dataobjects/ApiException';
+import { CookieManager } from '../../services/CookieManager';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,34 +13,55 @@ import { ApiVersion } from '../../dataobjects/ApiVersion';
 export class SignInComponent implements OnInit {
 
   apiCaller: ApiCaller;
-  apiVersion: ApiVersion = {
-    currentVersion : ''
-  };
+  cookieManager: CookieManager;
 
-  account: Account = {
-    displayName : '',
-    password : '',
-    username : ''
-  };
+  apiException = new ApiException();
+  session = new Session();
 
-  constructor(apiCaller: ApiCaller) {
+  apiErrorMessage = '';
+
+  account = new Account();
+
+  constructor(apiCaller: ApiCaller, cookieManager: CookieManager) {
     this.apiCaller = apiCaller;
+    this.cookieManager = cookieManager;
   }
-
-// router: Router;
-  // constructor(router: Router) {
-  //   this.router = router;
-  // }
 
   ngOnInit() {
-    // this.router.navigateByUrl('xxx');
-    this.apiCaller.getVersionX().subscribe(
-      data => { this.apiVersion = data; },
-      err => console.error(err), () => console.log('version check api responded'));
-    // console.log(this.apiVersion);
+
   }
 
-  getVersion(): string {
-    return this.apiVersion.currentVersion;
+  submitForm(username:string, password:string) {
+    this.account.username = username;
+    this.account.password = password;
+    this.loginIn(this.account);
+  }
+
+  loginIn(account:Account) {
+    this.apiCaller.login(account)
+      .subscribe(
+        data => { this.session = data.body; this.loginResponseSuccess();},
+        error => { this.apiException = error.error[0]; this.loginResponseFail();}
+      );
+  }
+
+  loginResponseSuccess() {
+    this.cookieManager.setCookie(this.session.token);
+  }
+
+  loginResponseFail() {
+    if(this.apiException.code === 3) {
+      this.apiErrorMessage = 'Invalid format'
+    } else if(this.apiException.code === 2) {
+      this.apiErrorMessage = 'Username not found'
+    } else if(this.apiException.code === 1) {
+      this.apiErrorMessage = 'Invalid credentials'
+    } else {
+      this.apiErrorMessage = 'There was an unexpected error. Try again.'
+    }
+  }
+
+  showApiError(): string {
+    return this.apiErrorMessage;
   }
 }

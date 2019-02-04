@@ -40,9 +40,12 @@
             <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
               Password is invalid.
             </div>
+            <div *ngIf="showApiError() !== ''" class="alert alert-danger">
+              {{ showApiError() }}
+            </div>
             <div class="col-sm-10 col-md-6 mx-auto">
               <div class="form-group">
-                <button type="submit" class="btn btn-block btn-lg btn-red"> Create Account  </button>
+                <button type="submit" class="btn btn-block btn-lg btn-red" (click)="submitForm(account.username, account.password, account.displayName)"> Create Account  </button>
               </div>
             </div>
             <p class="text-center">

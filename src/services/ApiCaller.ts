@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {ApiVersion} from '../dataobjects/ApiVersion';
-import {Observable} from 'rxjs';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Account } from '../dataobjects/Account';
 
 @Injectable()
 export class ApiCaller {
   constructor(private http: HttpClient) { }
 
-  baseApiUrl = 'http://localhost:8080/api/';
-  versionCheck = 'version-check';
+  private baseApiUrl = 'http://localhost:8080/api/';
+  private loginUrl = this.baseApiUrl + 'auth/login';
+  private createAccountUrl = this.baseApiUrl + 'account/';
 
-  getVersion() {
-    return this.http.get(this.baseApiUrl + this.versionCheck);
+  // GET Example
+  xxx(): Observable<HttpResponse<any>> {
+    return this.http.get<any>(this.loginUrl, { observe: 'response' });
   }
-  getVersionX(): Observable<ApiVersion> {
-    return this.http.get<ApiVersion>(this.baseApiUrl + this.versionCheck);
+
+  login(account: Account): Observable<HttpResponse<any>> {
+    return this.http.post<any>(this.loginUrl, account,{ observe: 'response' });
+  }
+
+  createAccount(account: Account): Observable<HttpResponse<any>> {
+    return this.http.post<any>(this.createAccountUrl, account,{ observe: 'response' });
   }
 }

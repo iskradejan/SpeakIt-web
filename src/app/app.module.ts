@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AccountCreateComponent } from './account-create/account-create.component';
+import { PostsComponent } from './posts/posts.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { AccountCreateComponent } from './account-create/account-create.componen
   declarations: [
     AppComponent,
     SignInComponent,
-    AccountCreateComponent
+    AccountCreateComponent,
+    PostsComponent
   ],
   providers: [
     ApiCaller,

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Account } from '../../dataobjects/Account';
-import { ApiCaller } from '../../services/ApiCaller';
-import { Session } from '../../dataobjects/Session';
-import { ApiException } from '../../dataobjects/ApiException';
 import { CookieManager } from '../../services/CookieManager';
+import { ApiCaller } from '../../services/ApiCaller';
+import { ApiException } from '../../dataobjects/ApiException';
+import { Account } from '../../dataobjects/Account';
+import { Session } from '../../dataobjects/Session';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,6 +13,7 @@ import { CookieManager } from '../../services/CookieManager';
 })
 export class SignInComponent implements OnInit {
 
+  router: Router;
   apiCaller: ApiCaller;
   cookieManager: CookieManager;
 
@@ -22,7 +24,8 @@ export class SignInComponent implements OnInit {
 
   account = new Account();
 
-  constructor(apiCaller: ApiCaller, cookieManager: CookieManager) {
+  constructor(router: Router, apiCaller: ApiCaller, cookieManager: CookieManager) {
+    this.router = router;
     this.apiCaller = apiCaller;
     this.cookieManager = cookieManager;
   }
@@ -47,6 +50,7 @@ export class SignInComponent implements OnInit {
 
   loginResponseSuccess() {
     this.cookieManager.setCookie(this.session.token);
+    this.router.navigateByUrl('/posts')
   }
 
   loginResponseFail() {

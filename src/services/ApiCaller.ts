@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Account } from '../dataobjects/Account';
 
@@ -10,6 +10,7 @@ export class ApiCaller {
   private baseApiUrl = 'http://localhost:8080/api/';
   private loginUrl = this.baseApiUrl + 'auth/login';
   private createAccountUrl = this.baseApiUrl + 'account/';
+  private allPostsUrl = this.baseApiUrl + 'post/';
 
   // GET Example
   xxx(): Observable<HttpResponse<any>> {
@@ -22,5 +23,9 @@ export class ApiCaller {
 
   createAccount(account: Account): Observable<HttpResponse<any>> {
     return this.http.post<any>(this.createAccountUrl, account,{ observe: 'response' });
+  }
+
+  fetchAllPosts(headers: HttpHeaders): Observable<HttpResponse<any>> {
+    return this.http.get<any>(this.allPostsUrl,{ headers: headers, observe: 'response' });
   }
 }

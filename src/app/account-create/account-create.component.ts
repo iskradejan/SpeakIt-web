@@ -42,7 +42,7 @@ export class AccountCreateComponent implements OnInit {
   createAccount(account:Account) {
     this.apiCaller.createAccount(account)
       .subscribe(
-        data => { this.session = data.body; this.createAccountResponseSuccess(account);},
+        data => { this.createAccountResponseSuccess(account);},
         error => { this.apiException = error.error[0]; this.createAccountResponseFail();}
       );
   }

@@ -16,3 +16,17 @@ body,html {
 .card {
   background-color: $baseGray;
 }
+
+.post {
+  margin: 20px 0 20px 0;
+}
+
+.post > .post-title {
+  background-color: white;
+}
+
+.post > .post-footer {
+  font-size: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}

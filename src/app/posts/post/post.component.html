@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card post">
+        <div class="card-header post-header">{{ post.title }}</div>
+        <div class="card-body post-body">{{ post.body }}</div>
+        <div class="card-footer post-footer">posted by: {{ post.user.displayName }} | at: {{ formatDate(post.createDate) }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12" *ngFor="let comment of post.comments">
+      <div class="card post comment">
+        <div class="card-body comment-body">{{ comment.body }}</div>
+        <div class="card-footer comment-footer">posted by: {{ comment.user.displayName }} | at: {{ formatDate(comment.createDate) }}</div>
+      </div>
+    </div>
+  </div>
+</div>

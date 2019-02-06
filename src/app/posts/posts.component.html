@@ -2,7 +2,7 @@
   <div class="row align-items-center">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" *ngFor="let post of posts">
       <div class="card post">
-        <div class="card-body post-title">{{ post.title }}</div>
+        <div class="card-body post-body"><a [routerLink]="['/posts', post.id]">{{ post.title }}</a></div>
         <div class="card-footer post-footer">posted by: {{ post.user.displayName }} | at: {{ formatDate(post.createDate) }}</div>
       </div>
     </div>

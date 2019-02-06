@@ -16,11 +16,43 @@ body, html {
   margin: 20px 0 20px 0;
 }
 
-.post > .post-title {
+.post > .post-header {
+  background-color: white;
+  color: #FC4A1A;
+  font-weight: 500;
+}
+
+.post > .post-body {
   background-color: white;
 }
 
+.post > .post-body > a {
+  color: #FC4A1A;
+  font-weight: 500;
+  text-decoration: none;
+}
+
 .post > .post-footer {
+  font-size: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.comment {
+  margin: 5px 0 5px 0;
+}
+
+.comment > .comment-body {
+  font-size: 12px;
+  padding: 10px 20px 10px 20px;
+  margin: 0;
+}
+
+.comment > .comment-body {
+  background-color: white;
+}
+
+.comment > .comment-footer {
   font-size: 10px;
   padding-top: 2px;
   padding-bottom: 2px;

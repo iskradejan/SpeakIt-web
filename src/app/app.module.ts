@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AccountCreateComponent } from './account-create/account-create.component';
 import { PostsComponent } from './posts/posts.component';
+import { PostComponent } from './posts/post/post.component';
+import { DataHolder } from '../services/DataHolder';
 
 @NgModule({
   imports: [
@@ -23,11 +25,13 @@ import { PostsComponent } from './posts/posts.component';
     AppComponent,
     SignInComponent,
     AccountCreateComponent,
-    PostsComponent
+    PostsComponent,
+    PostComponent
   ],
   providers: [
     ApiCaller,
     CookieManager,
+    DataHolder,
     {
       provide: APP_BASE_HREF,
       useValue: ''

@@ -12,9 +12,6 @@ import { CookieManager } from '../../services/CookieManager';
 })
 export class AccountCreateComponent implements OnInit {
 
-  apiCaller: ApiCaller;
-  cookieManager: CookieManager;
-
   apiException = new ApiException();
   session = new Session();
 
@@ -22,10 +19,7 @@ export class AccountCreateComponent implements OnInit {
 
   account = new Account();
 
-  constructor(apiCaller: ApiCaller, cookieManager: CookieManager) {
-    this.apiCaller = apiCaller;
-    this.cookieManager = cookieManager;
-  }
+  constructor(private apiCaller: ApiCaller, private cookieManager: CookieManager) {}
 
   ngOnInit() {
 

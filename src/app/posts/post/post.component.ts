@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import { Post } from '../../../dataobjects/Post';
-import {DataHolder} from '../../../services/DataHolder';
+import { DataHolder } from '../../../services/DataHolder';
+import { ApiCaller } from '../../../services/ApiCaller';
 
 @Component({
   selector: 'app-post',
@@ -9,35 +10,35 @@ import {DataHolder} from '../../../services/DataHolder';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  route:ActivatedRoute;
-  dataHolder:DataHolder;
+  apiErrorMessage = '';
 
   post:Post;
 
-  constructor(route: ActivatedRoute, dataHolder: DataHolder) {
-    this.route = route;
-    this.dataHolder = dataHolder;
-  }
+  constructor(private route: ActivatedRoute, private dataHolder: DataHolder, private apiCaller: ApiCaller) {}
 
   ngOnInit() {
-    console.log('xx');
     this.route.paramMap.subscribe(params => {
-      console.log('qq');
-      console.log(params.get('id'));
       this.post = this.getPost(params.get('id'));
-      console.log('pp');
     });
   }
 
   private getPost(id): Post {
-    console.log(id);
-    console.log('sss');
-    console.log(this.dataHolder.posts);
-    return this.dataHolder.posts.find(post => post.id == id);
+    if(typeof this.dataHolder.posts == 'undefined') {
+      this.apiCaller.fetchPostById(id).subscribe(
+        data => { this.post = data.body; return this.post },
+        error => { this.apiErrorMessage = 'This post is experiencing some problems';}
+      );
+    } else {
+      return this.dataHolder.posts.find(post => post.id == id);
+    }
   }
 
   formatDate(date:string): string {
     return elapsedTime(date);
+  }
+
+  showApiError(): string {
+    return this.apiErrorMessage;
   }
 }
 

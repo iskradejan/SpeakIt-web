@@ -1,20 +1,20 @@
-$baseGray: #efefef;
+$baseGray: #f7f7f7;
 $baseOrange: #F78733;
-$baseRed: #FC4A1A;
+$baseRed: #cc1818;
 $baseTeal: #4ABDAC;
 
 body,html {
   height: 100%;
-  background-color: white;
+  background-color: $baseGray;
 }
 
 .btn-red {
-  background-color:$baseOrange;
+  background-color:$baseRed;
   color: white;
 }
 
 .card {
-  background-color: $baseGray;
+  background-color: white;
 }
 
 .post {
@@ -41,6 +41,8 @@ body,html {
   font-size: 10px;
   padding-top: 2px;
   padding-bottom: 2px;
+  color: white;
+  background-color: black;
 }
 
 .comment {

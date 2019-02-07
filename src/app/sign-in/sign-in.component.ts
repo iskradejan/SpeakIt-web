@@ -13,10 +13,6 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
 
-  router: Router;
-  apiCaller: ApiCaller;
-  cookieManager: CookieManager;
-
   apiException = new ApiException();
   session = new Session();
 
@@ -24,11 +20,7 @@ export class SignInComponent implements OnInit {
 
   account = new Account();
 
-  constructor(router: Router, apiCaller: ApiCaller, cookieManager: CookieManager) {
-    this.router = router;
-    this.apiCaller = apiCaller;
-    this.cookieManager = cookieManager;
-  }
+  constructor(private router: Router, private apiCaller: ApiCaller, private cookieManager: CookieManager) {}
 
   ngOnInit() {
 

@@ -16,4 +16,9 @@
       </div>
     </div>
   </div>
+  <div class="row align-items-center" *ngIf="showApiError() !== ''">
+    <div class="col-lg-10 alert alert-danger">
+      {{ showApiError() }}
+    </div>
+  </div>
 </div>

@@ -3,8 +3,7 @@ import { ApiCaller } from '../../services/ApiCaller';
 import { ApiException } from '../../dataobjects/ApiException';
 import { CookieManager } from '../../services/CookieManager';
 import { Post } from '../../dataobjects/Post';
-import { HttpHeaders } from '@angular/common/http';
-import {DataHolder} from '../../services/DataHolder';
+import { DataHolder } from '../../services/DataHolder';
 
 @Component({
   selector: 'app-posts',
@@ -13,23 +12,15 @@ import {DataHolder} from '../../services/DataHolder';
 })
 export class PostsComponent implements OnInit {
 
-  apiCaller: ApiCaller;
-  cookieManager: CookieManager;
-  dataHolder: DataHolder;
-
   apiErrorMessage = '';
   apiException = new ApiException();
 
   posts:Post[];
 
-  constructor(apiCaller: ApiCaller, cookieManager: CookieManager, dataHolder: DataHolder) {
-    this.apiCaller = apiCaller;
-    this.cookieManager = cookieManager;
-    this.dataHolder = dataHolder;
-  }
+  constructor(private apiCaller: ApiCaller, private cookieManager: CookieManager, private dataHolder: DataHolder) {}
 
   ngOnInit() {
-    this.apiCaller.fetchAllPosts(new HttpHeaders({ 'sessionToken': this.cookieManager.getCookie() })).subscribe(
+    this.apiCaller.fetchAllPosts().subscribe(
       data => { this.posts = data.body; this.dataHolder.posts = this.posts;},
       error => { this.apiException = error.error[0]; this.postsResponseFail();}
     );
@@ -41,6 +32,10 @@ export class PostsComponent implements OnInit {
 
   formatDate(date:string): string {
     return elapsedTime(date);
+  }
+
+  showApiError(): string {
+    return this.apiErrorMessage;
   }
 }
 

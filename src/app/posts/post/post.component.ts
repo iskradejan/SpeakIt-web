@@ -12,7 +12,6 @@ export class PostComponent implements OnInit {
   route:ActivatedRoute;
   dataHolder:DataHolder;
 
-  id;
   post:Post;
 
   constructor(route: ActivatedRoute, dataHolder: DataHolder) {
@@ -21,13 +20,19 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('xx');
     this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
+      console.log('qq');
+      console.log(params.get('id'));
+      this.post = this.getPost(params.get('id'));
+      console.log('pp');
     });
-    this.post = this.getPost(this.id);
   }
 
   private getPost(id): Post {
+    console.log(id);
+    console.log('sss');
+    console.log(this.dataHolder.posts);
     return this.dataHolder.posts.find(post => post.id == id);
   }
 

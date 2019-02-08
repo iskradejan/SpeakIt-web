@@ -4,7 +4,10 @@
       <div class="card post">
         <div class="card-header post-header">{{ post.title }}</div>
         <div class="card-body post-body">{{ post.body }}</div>
-        <div class="card-footer post-footer">posted by: {{ post.user.displayName }} | at: {{ formatDate(post.createDate) }}</div>
+        <div class="card-footer post-footer">
+          <span>posted by: {{ post.user.displayName }}</span>
+          <span>{{ formatDate(post.createDate) }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -12,7 +15,10 @@
     <div class="col-lg-12" *ngFor="let comment of post.comments">
       <div class="card post comment">
         <div class="card-body comment-body">{{ comment.body }}</div>
-        <div class="card-footer comment-footer">posted by: {{ comment.user.displayName }} | at: {{ formatDate(comment.createDate) }}</div>
+        <div class="card-footer comment-footer">
+          <span>posted by: {{ post.user.displayName }}</span>
+          <span>{{ formatDate(post.createDate) }}</span>
+        </div>
       </div>
     </div>
   </div>

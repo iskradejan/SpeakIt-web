@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiCaller } from '../services/ApiCaller';
 import { CookieManager } from '../services/CookieManager';
 
@@ -13,6 +13,7 @@ import { AccountCreateComponent } from './account-create/account-create.componen
 import { PostsComponent } from './posts/posts.component';
 import { PostComponent } from './posts/post/post.component';
 import { DataHolder } from '../services/DataHolder';
+import { TokenInterceptor } from '../services/TokenInterceptor';
 
 @NgModule({
   imports: [
@@ -35,6 +36,11 @@ import { DataHolder } from '../services/DataHolder';
     {
       provide: APP_BASE_HREF,
       useValue: ''
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
